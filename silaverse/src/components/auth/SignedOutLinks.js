@@ -5,7 +5,7 @@ const SignedOutLinks = () => {
     return(
         <ul>
             <li><Link to='/login'>Admin Login</Link></li>
-            <li><Link to='/'>Register</Link></li>
+            <li><Link to='/register'>Register</Link></li>
         </ul>
     );
 }

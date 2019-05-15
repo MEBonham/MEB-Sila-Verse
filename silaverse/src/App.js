@@ -4,6 +4,7 @@ import Header from './components/auth/Header';
 import Sidebar from './components/sidebar/Sidebar';
 import CharSheet from './components/main/CharSheet';
 import Login from './components/auth/Login';
+import Register from './components/auth/Register';
 
 import './App.css';
 
@@ -15,6 +16,7 @@ function App() {
       <Route path="/viewhero" component={Sidebar} />
       <Route path="/viewhero" component={CharSheet} />
       <Route path="/login" component={Login} />
+      <Route path="/register" component={Register} />
     </div>
   );
 }
