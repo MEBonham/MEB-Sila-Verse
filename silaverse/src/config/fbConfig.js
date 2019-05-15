@@ -3,7 +3,7 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 // Your web app's Firebase configuration
-var firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyB7S9796ors6iLT_y3gI1ZpYMpdoVwZKZc",
     authDomain: "sila-verse.firebaseapp.com",
     databaseURL: "https://sila-verse.firebaseio.com",
@@ -14,6 +14,6 @@ var firebaseConfig = {
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-  firebase.firestore().settings({ timestampsInSnapshots: true });
+//   firebase.firestore().settings({ timestampsInSnapshots: true });
 
   export default firebase;

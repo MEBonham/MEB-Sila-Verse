@@ -1,5 +1,5 @@
 import React from 'react';
-import useLoginForm from '../../hooks/useLoginForm';
+import useForm from '../../hooks/useForm';
 
 const Login = () => {
 
@@ -9,7 +9,7 @@ const Login = () => {
               Password: ${inputs.password}`);
     }
 
-    const { inputs, handleInputChange, handleSubmit } = useLoginForm(signIn);
+    const { inputs, handleInputChange, handleSubmit, setInputs } = useForm(signIn);
 
     return(
         <form className="login-page" onSubmit={handleSubmit}>

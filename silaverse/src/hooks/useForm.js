@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useLoginForm = cb => {
+const useForm = cb => {
     const [inputs, setInputs] = useState({});
 
     const handleSubmit = ev => {
@@ -21,8 +21,9 @@ const useLoginForm = cb => {
     return {
         handleSubmit,
         handleInputChange,
-        inputs
+        inputs,
+        setInputs
     };
 }
 
-export default useLoginForm;
+export default useForm;

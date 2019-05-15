@@ -1,5 +1,5 @@
 import React from 'react';
-import useLoginForm from '../../hooks/useLoginForm';
+import useForm from '../../hooks/useForm';
 
 const Register = () => {
 
@@ -9,7 +9,7 @@ const Register = () => {
               Password: ${inputs.password}`);
     }
 
-    const { inputs, handleInputChange, handleSubmit } = useLoginForm(registry);
+    const { inputs, handleInputChange, handleSubmit, setInputs } = useForm(registry);
 
     return(
         <form className="login-page" onSubmit={handleSubmit}>
