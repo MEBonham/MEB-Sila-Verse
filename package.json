@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "firebase": "^6.0.2",
+    "reactn": "^2.0.1"
+  }
+}
