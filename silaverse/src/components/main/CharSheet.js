@@ -1,11 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useGlobal } from 'reactn';
 
 const CharSheet = () => {
+
+    const [ heroes, setHeroes ] = useGlobal('heroes');
+
     return(
         <section className="char-sheet">
-            <h1>Hero Name</h1>
-            <h2>Identity</h2>
+            <h1>{heroes[0].name}</h1>
+            <h2>{heroes[0].identity}</h2>
         </section>
     );
 }

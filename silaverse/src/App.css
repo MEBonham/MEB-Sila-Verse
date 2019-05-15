@@ -44,16 +44,17 @@
 .char-sheet {
     width: 68%;
     margin: 10px auto;
-    border: 2px solid brown;
     padding: 24px 3%;
     background: tan;
     border-radius: 8px;
+    box-shadow: 2px 2px 10px brown;
 }
 
 .char-sheet h1 {
     font-size: 3rem;
     font-weight: bold;
     font-style: italic;
+    margin-bottom: 2px;
 }
 
 .char-sheet h2 {
