@@ -8,14 +8,15 @@ import App from './App';
 const db = firebase.firestore();
 const heroLib = [];
 db.collection("heroes").get()
-    .then((querySnapshot) => {
+    .then(querySnapshot => {
         querySnapshot.forEach(doc => {
-            heroLib.push(doc.data());
+            const hero = doc.data();
+            hero.id = doc.id;
+            heroLib.push(hero);
         });
         setGlobal({
             heroes: heroLib
         });
-        // console.log(heroLib);
     })
     .catch(err => {
         console.log("Error initializing heroes from db: ", err);

@@ -1,22 +1,46 @@
-import React from 'react';
+import React, { setGlobal } from 'reactn';
 import useForm from '../../hooks/useForm';
 import firebase from '../../config/fbConfig';
+import { useGlobal } from 'reactn';
 
 const NewHeroForm = () => {
 
+    const [ prevHeroes, setHeroes ] = useGlobal('heroes');
     const sendInfo = () => {
         // alert(`Data Received!
         //       URL-ID: ${inputs.urlid}
         //       Name: ${inputs.name}
         //       Identity: ${inputs.identity}`);
         const db = firebase.firestore();
-        const heroRef = db.collection("heroes").add({
+        if (!inputs.identity) {
+            // setInputs({
+            //     ...inputs,
+            //     identity: ""
+            // });
+            inputs.identity = "";
+        }
+        db.collection("heroes").add({
             urlid: inputs.urlid,
             name: inputs.name,
             identity: inputs.identity
         })
         .then(heroRef => {
-            console.log("Document written to db with ID ", heroRef.id);
+            db.collection("heroes")
+                .doc(heroRef.id)
+                .get()
+                .then(querySnapshot => {
+                    if (querySnapshot.exists) {
+                        const hero = querySnapshot.data();
+                        hero.id = heroRef.id;
+                        prevHeroes.push(hero);
+                        setGlobal({
+                            heroes: prevHeroes
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.log("Error getting hero (ID ", heroRef.id, ") info to update with: ", err);
+                });
         })
         .catch(err => {
             console.error("Error adding hero: ", err);

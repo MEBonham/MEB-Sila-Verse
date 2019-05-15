@@ -16,7 +16,7 @@ function App() {
       <Header />
       <Route exact path="/" component={Sidebar} />
       <Route path="/viewhero" component={Sidebar} />
-      <Route path="/viewhero" component={CharSheet} />
+      <Route path="/viewhero/:id" component={CharSheet} />
       <Route path="/newhero" component={Sidebar} />
       <Route path="/newhero" component={NewHeroForm} />
       <Route path="/login" component={Login} />

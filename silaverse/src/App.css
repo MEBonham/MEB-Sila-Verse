@@ -47,6 +47,10 @@
     font-size: 1.4rem;
 }
 
+.full-sidebar .hero-tree {
+    margin-top: 15px;
+}
+
 .char-sheet {
     width: 68%;
     margin: 10px auto;
