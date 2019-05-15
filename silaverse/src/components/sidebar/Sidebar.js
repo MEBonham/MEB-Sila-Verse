@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Sidebar = () => {
     return(
         <section className="full-sidebar">
-            <a href="/viewhero">View Hero</a>
+            <Link to="/viewhero">View Hero</Link>
         </section>
     );
 }
