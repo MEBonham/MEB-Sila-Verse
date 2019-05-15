@@ -4,9 +4,13 @@
     height: 100vh;
     margin: 0 auto;
     background: lightgray;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .App > header {
+    width: 100%;
+    height: calc(2.6rem + 10px);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -27,4 +31,29 @@
     font-size: 1.4rem;
     color: white;
     margin-left: 20px;
+}
+
+.full-sidebar {
+    width: 28%;
+    height: calc(100% - 2.6rem - 10px);
+    background: lightblue;
+}
+
+.char-sheet {
+    width: 68%;
+    margin: 10px auto;
+    border: 2px solid brown;
+    padding: 24px 3%;
+    background: tan;
+    border-radius: 8px;
+}
+
+.char-sheet h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.char-sheet h2 {
+    font-size: 2.6rem;
 }

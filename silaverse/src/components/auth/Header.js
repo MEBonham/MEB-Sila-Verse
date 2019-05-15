@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SignedOutLinks from './SignedOutLinks';
+import SignedInLinks from './SignedInLinks';
 
 const Header = () => {
     return(
