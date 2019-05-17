@@ -71,9 +71,20 @@
     font-size: 2.4rem;
 }
 
-.hero-info-form {
+.hero-info-form-envelope {
     width: 70%;
     padding: 24px 2%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.hero-info-form-envelope .push-right {
+    width: 48px;
+    height: 48px;
+}
+
+.hero-info-form {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;

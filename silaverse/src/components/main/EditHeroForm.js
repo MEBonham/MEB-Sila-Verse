@@ -3,9 +3,13 @@ import useForm from '../../hooks/useForm';
 import firebase from '../../config/fbConfig';
 import { useGlobal } from 'reactn';
 
-const NewHeroForm = () => {
+import deleteicon from '../../images/delete-icon.png';
+
+const EditHeroForm = props => {
 
     const [ prevHeroes, setHeroes ] = useGlobal('heroes');
+    const urlid = props.match.params.id;
+
     const sendInfo = () => {
         const db = firebase.firestore();
         if (!inputs.identity) {
@@ -37,20 +41,40 @@ const NewHeroForm = () => {
         .catch(err => {
             console.error("Error adding hero: ", err);
         });
-        setInputs({
-            ...inputs,
-            urlid: "",
-            name: "",
-            identity: ""
-        })
+    }
+
+    const handleDelete = () => {
+        if (window.confirm("Are you sure you want to delete this hero?")) {
+            const db = firebase.firestore();
+            db.collection("heroes").where("urlid", "==", urlid)
+                .get()
+                .then(querySnapshot => {
+                    if (!querySnapshot.empty) {
+                        const heroId = querySnapshot.docs[0].id;
+                        db.collection("heroes").doc(heroId)
+                            .delete()
+                            .then()
+                            .catch(err => {
+                                console.log("Error deleting hero: ", err);
+                            });
+                    }
+                    else {
+                        console.log("Cannot find hero matching this page.");
+                    }
+                })
+                .catch(err => {
+                    console.log("Error getting hero that goes with this page in order to delete: ", err);
+                });
+        }
     }
 
     const { inputs, handleInputChange, handleSubmit, setInputs } = useForm(sendInfo);
 
     return(
         <section className="hero-info-form-envelope">
+            <img src={deleteicon} alt="Delete Hero" className="push-right" onClick={handleDelete} />
             <form className="hero-info-form" onSubmit={handleSubmit}>
-                <h1>New Hero Info</h1>
+                <h1>Edit Hero Info</h1>
                 <label htmlFor="urlid">URL ID</label>
                 <input
                     type="text"
@@ -80,4 +104,4 @@ const NewHeroForm = () => {
     );
 }
 
-export default NewHeroForm;
+export default EditHeroForm;
