@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "firebase": "^6.0.2",
+    "react-contexify": "^4.1.0",
     "reactn": "^2.0.1"
   }
 }

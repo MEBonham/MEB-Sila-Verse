@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { MenuProvider } from 'react-contextify';
+import { Link, withRouter } from 'react-router-dom';
+import { MenuProvider } from 'react-contexify';
 import ContextMenu from './ContextMenu';
 
 class HeroListing extends Component {
@@ -7,21 +8,21 @@ class HeroListing extends Component {
         super(props);
         this.state = {
             triggerId: `heroListing-${props.id}`,
-            menuId: `heroListingMenu-${props.id}`,
+            // menuId: `heroListingMenu-${props.id}`,
             url: `/viewhero/${props.urlid}`,
-            name: props.name
+            name: props.name,
+            tag: props.urlid
         };
     }
     render() {
 
         return (
             <div>
-                <p id={this.state.triggerId}>{this.state.name}</p>
-
-                <ContextMenu menuId={this.state.menuId} />
+                <MenuProvider id={this.state.triggerId}><Link to={this.state.url}>{this.state.name}</Link></MenuProvider>
+                <ContextMenu menuId={this.state.triggerId} url={this.state.tag} history={this.props.history} />
             </div>
         );
     }
 }
 
-export default HeroListing;
+export default withRouter(HeroListing);
