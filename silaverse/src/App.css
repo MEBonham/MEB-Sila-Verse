@@ -61,14 +61,25 @@
 }
 
 .char-sheet h1 {
-    font-size: 3rem;
+    font-size: 3.4rem;
     font-weight: bold;
     font-style: italic;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
 }
 
 .char-sheet h2 {
     font-size: 2.4rem;
+    margin-bottom: 4px;
+}
+
+.char-sheet .hero-type {
+    font-size: 1.4rem;
+    font-style: italic;
+    margin-bottom: 2px;
+}
+
+.char-sheet .last-header-line {
+    font-size: 1.4rem;
 }
 
 .hero-info-form-envelope {

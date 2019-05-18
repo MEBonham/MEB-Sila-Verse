@@ -15,6 +15,9 @@ const EditHeroForm = props => {
         if (!inputs.identity) {
             inputs.identity = "";
         }
+        if (!inputs.heroType) {
+            inputs.heroType = "";
+        }
         db.collection("heroes").where("urlid", "==", urlid)
             .get()
             .then(querySnapshot => {
@@ -23,7 +26,9 @@ const EditHeroForm = props => {
                     const editedHero = {
                         urlid: inputs.urlid,
                         name: inputs.name,
-                        identity: inputs.identity
+                        identity: inputs.identity,
+                        heroType: inputs.heroType,
+                        powerLevel: inputs.powerLevel
                     };
                     db.collection("heroes").doc(heroId)
                         .set(editedHero)
@@ -38,7 +43,7 @@ const EditHeroForm = props => {
                                     }
                                 ]
                             });
-                            props.history.push(`/viewhero/${urlid}`);
+                            props.history.push(`/viewhero/${inputs.urlid}`);
                         })
                         .catch(err => {
                             console.log("Error editing hero: ", err);
@@ -96,7 +101,9 @@ const EditHeroForm = props => {
                             setInputs({
                                 urlid: doc.data().urlid,
                                 name: doc.data().name,
-                                identity: doc.data().identity
+                                identity: doc.data().identity,
+                                heroType: doc.data().heroType,
+                                powerLevel: doc.data().powerLevel
                             });
                         })
                         .catch(err => {
@@ -111,7 +118,7 @@ const EditHeroForm = props => {
                 console.log("Error finding hero that goes with this page: ", err);
             });
     },
-    [ inputs.urlid, urlid ]);
+    [ urlid ]);
 
     return(
         <section className="hero-info-form-envelope">
@@ -140,6 +147,23 @@ const EditHeroForm = props => {
                     id="identity"
                     onChange={handleInputChange}
                     value={inputs.identity}
+                />
+                <label htmlFor="heroType">Hero Type</label>
+                <input
+                    type="text"
+                    id="heroType"
+                    placeholder="Original? NPC or PC?"
+                    onChange={handleInputChange}
+                    value={inputs.heroType}
+                />
+                <label htmlFor="powerLevel">Power Level</label>
+                <input
+                    type="number"
+                    id="powerLevel"
+                    placeholder={10}
+                    onChange={handleInputChange}
+                    value={inputs.powerLevel}
+                    required
                 />
                 <button type="submit">Save Hero</button>
             </form>

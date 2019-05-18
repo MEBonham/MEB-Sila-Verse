@@ -11,10 +11,15 @@ const NewHeroForm = () => {
         if (!inputs.identity) {
             inputs.identity = "";
         }
+        if (!inputs.heroType) {
+            inputs.heroType = "";
+        }
         db.collection("heroes").add({
             urlid: inputs.urlid,
             name: inputs.name,
-            identity: inputs.identity
+            identity: inputs.identity,
+            heroType: inputs.heroType,
+            powerLevel: inputs.powerLevel
         })
         .then(heroRef => {
             db.collection("heroes")
@@ -41,7 +46,9 @@ const NewHeroForm = () => {
             ...inputs,
             urlid: "",
             name: "",
-            identity: ""
+            identity: "",
+            heroType: "",
+            powerLevel: null
         })
     }
 
@@ -73,6 +80,23 @@ const NewHeroForm = () => {
                     id="identity"
                     onChange={handleInputChange}
                     value={inputs.identity}
+                />
+                <label htmlFor="heroType">Hero Type</label>
+                <input
+                    type="text"
+                    id="heroType"
+                    placeholder="Original? NPC or PC?"
+                    onChange={handleInputChange}
+                    value={inputs.heroType}
+                />
+                <label htmlFor="powerLevel">Power Level</label>
+                <input
+                    type="number"
+                    id="powerLevel"
+                    placeholder={10}
+                    onChange={handleInputChange}
+                    value={inputs.powerLevel}
+                    required
                 />
                 <button type="submit">Save Hero</button>
             </form>

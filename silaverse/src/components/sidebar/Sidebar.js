@@ -16,7 +16,6 @@ const Sidebar = () => {
 
     return(
         <section className="full-sidebar">
-            <Link to="/viewhero">View Hero</Link>
             <Link to="/newhero">New Hero</Link>
             <div className="hero-tree">
                 {heroList}

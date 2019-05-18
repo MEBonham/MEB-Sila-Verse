@@ -9,10 +9,13 @@ const CharSheet = props => {
         heroes.filter(hero => hero.urlid === id)
         : [];
     if (filteredHeroes.length) {
+        const thisHero = filteredHeroes[0];
         return(
             <section className="char-sheet">
-                <h1>{filteredHeroes[0].name}</h1>
-                <h2>{filteredHeroes[0].identity}</h2>
+                <h1>{thisHero.name}</h1>
+                <h2>{thisHero.identity}</h2>
+                <p className="hero-type">{thisHero.heroType}</p>
+                <p className="last-header-line">Power Level {thisHero.powerLevel} ( ppt)</p>
             </section>
         );
     }
