@@ -15,32 +15,42 @@ const EditHeroForm = props => {
         if (!inputs.identity) {
             inputs.identity = "";
         }
-        db.collection("heroes").add({
-            urlid: inputs.urlid,
-            name: inputs.name,
-            identity: inputs.identity
-        })
-        .then(heroRef => {
-            db.collection("heroes")
-                .doc(heroRef.id)
-                .get()
-                .then(querySnapshot => {
-                    if (querySnapshot.exists) {
-                        const hero = querySnapshot.data();
-                        hero.id = heroRef.id;
-                        prevHeroes.push(hero);
-                        setGlobal({
-                            heroes: prevHeroes
+        db.collection("heroes").where("urlid", "==", urlid)
+            .get()
+            .then(querySnapshot => {
+                if (!querySnapshot.empty) {
+                    const heroId = querySnapshot.docs[0].id;
+                    const editedHero = {
+                        urlid: inputs.urlid,
+                        name: inputs.name,
+                        identity: inputs.identity
+                    };
+                    db.collection("heroes").doc(heroId)
+                        .set(editedHero)
+                        .then(() => {
+                            const minusOneHero = prevHeroes.filter(hero => hero.urlid !== urlid);
+                            setGlobal({
+                                heroes: [
+                                    ...minusOneHero,
+                                    {
+                                        ...editedHero,
+                                        id: heroId
+                                    }
+                                ]
+                            });
+                            props.history.push(`/viewhero/${urlid}`);
+                        })
+                        .catch(err => {
+                            console.log("Error editing hero: ", err);
                         });
-                    }
-                })
-                .catch(err => {
-                    console.log("Error getting hero (ID ", heroRef.id, ") info to update with: ", err);
-                });
-        })
-        .catch(err => {
-            console.error("Error adding hero: ", err);
-        });
+                }
+                else {
+                    console.log("Cannot find hero matching this page.");
+                }
+            })
+            .catch(err => {
+                console.log("Error getting hero that goes with this page in order to edit: ", err);
+            });
     }
 
     const handleDelete = () => {
@@ -83,7 +93,6 @@ const EditHeroForm = props => {
                     const heroPrevData = db.collection("heroes").doc(heroId);
                     heroPrevData.get()
                         .then(doc => {
-                            console.log(doc.data());
                             setInputs({
                                 urlid: doc.data().urlid,
                                 name: doc.data().name,
