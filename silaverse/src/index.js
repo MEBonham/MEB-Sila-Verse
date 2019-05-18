@@ -15,25 +15,19 @@ db.collection("heroes").get()
             heroLib.push(hero);
         });
         setGlobal({
-            heroes: heroLib
+            heroes: heroLib,
+            pptTotals: {
+                abilities: 0,
+                powers: 0,
+                advantages: 0,
+                skills: 0,
+                defenses: 0
+            }
         });
     })
     .catch(err => {
         console.log("Error initializing heroes from db: ", err);
     });
-
-// setGlobal({
-//     heroes: [
-//         {
-//             name: "Tiger Strike",
-//             identity: "Keloth Vorski"
-//         },
-//         {
-//             name: "Wildran",
-//             identity: "Seth Fandral"
-//         }
-//     ]
-// });
 
 ReactDOM.render(
     <BrowserRouter>
