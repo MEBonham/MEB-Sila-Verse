@@ -1,17 +1,17 @@
-import React, { setGlobal } from 'reactn';
+import React, { setGlobal, useGlobal } from 'reactn';
+import { useEffect } from 'react';
 import useForm from '../../hooks/useForm';
 import firebase from '../../config/fbConfig';
-import { useGlobal } from 'reactn';
 
 import deleteicon from '../../images/delete-icon.png';
 
 const EditHeroForm = props => {
 
+    const db = firebase.firestore();
     const [ prevHeroes, setHeroes ] = useGlobal('heroes');
     const urlid = props.match.params.id;
 
     const sendInfo = () => {
-        const db = firebase.firestore();
         if (!inputs.identity) {
             inputs.identity = "";
         }
@@ -45,7 +45,6 @@ const EditHeroForm = props => {
 
     const handleDelete = () => {
         if (window.confirm("Are you sure you want to delete this hero?")) {
-            const db = firebase.firestore();
             db.collection("heroes").where("urlid", "==", urlid)
                 .get()
                 .then(querySnapshot => {
@@ -69,6 +68,35 @@ const EditHeroForm = props => {
     }
 
     const { inputs, handleInputChange, handleSubmit, setInputs } = useForm(sendInfo);
+    useEffect(() => {
+        db.collection("heroes").where("urlid", "==", urlid)
+            .get()
+            .then(querySnapshot => {
+                if (!querySnapshot.empty) {
+                    const heroId = querySnapshot.docs[0].id;
+                    const heroPrevData = db.collection("heroes").doc(heroId);
+                    heroPrevData.get()
+                        .then(doc => {
+                            console.log(doc.data());
+                            setInputs({
+                                urlid: doc.data().urlid,
+                                name: doc.data().name,
+                                identity: doc.data().identity
+                            });
+                        })
+                        .catch(err => {
+                            console.log("Error getting hero data: ", err);
+                        });
+                }
+                else {
+                    console.log("Error finding hero that goes with this page.");
+                }
+            })
+            .catch(err => {
+                console.log("Error finding hero that goes with this page: ", err);
+            });
+    },
+    [ inputs.urlid, urlid ]);
 
     return(
         <section className="hero-info-form-envelope">
