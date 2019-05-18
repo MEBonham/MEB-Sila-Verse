@@ -52,7 +52,13 @@ const EditHeroForm = props => {
                         const heroId = querySnapshot.docs[0].id;
                         db.collection("heroes").doc(heroId)
                             .delete()
-                            .then()
+                            .then(() => {
+                                const minusOneHero = prevHeroes.filter(hero => hero.urlid !== urlid);
+                                setGlobal({
+                                    heroes: minusOneHero
+                                });
+                                props.history.push("/");
+                            })
                             .catch(err => {
                                 console.log("Error deleting hero: ", err);
                             });
