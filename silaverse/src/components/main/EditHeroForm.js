@@ -74,14 +74,12 @@ const EditHeroForm = props => {
                                 abilities: formattedAbilities,
                                 id: heroId
                             };
-                            console.log("flag1");
                             setGlobal({
                                 heroes: [
                                     ...minusOneHero,
                                     formattedHero
                                 ]
                             });
-                            console.log("flag2");
                             props.history.push(`/viewhero/${inputs.urlid}`);
                         })
                         .catch(err => {

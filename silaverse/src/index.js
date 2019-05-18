@@ -12,6 +12,7 @@ db.collection("heroes").get()
         querySnapshot.forEach(doc => {
             const hero = doc.data();
             hero.id = doc.id;
+            hero.abilities = JSON.parse(doc.data().abilities);
             heroLib.push(hero);
         });
         setGlobal({

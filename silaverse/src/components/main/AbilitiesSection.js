@@ -1,9 +1,9 @@
-import React, { setGlobal, useGlobal } from 'reactn';
+import React, { setGlobal, useGlobal, getGlobal } from 'reactn';
 import { useEffect } from 'react';
 
 const AbilitiesSection = props => {
     const [pptTotals, setPptTotals] = useGlobal('pptTotals');
-    const abilities = JSON.parse(props.hero.abilities);
+    const abilities = props.hero.abilities;
     const strPlus = (!isNaN(abilities.str.eff) && abilities.str.eff >= 0) ? "+" : "";
     const staPlus = (!isNaN(abilities.sta.eff) && abilities.sta.eff >= 0) ? "+" : "";
     const aglPlus = (!isNaN(abilities.agl.eff) && abilities.agl.eff >= 0) ? "+" : "";
@@ -24,14 +24,13 @@ const AbilitiesSection = props => {
     });
 
     useEffect(() => {
-        setPptTotals({
-            ...pptTotals,
-            abilities: total
-        });
         setGlobal({
-            pptTotals: pptTotals
+            pptTotals: {
+                ...pptTotals,
+                abilities: total
+            }
         });
-    }, []);
+    }, [ total ]);
 
     return(
         <section>
