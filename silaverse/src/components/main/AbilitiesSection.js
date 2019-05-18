@@ -14,7 +14,7 @@ const AbilitiesSection = props => {
     const prePlus = (!isNaN(abilities.pre.eff) && abilities.pre.eff >= 0) ? "+" : "";
 
     let total = 0;
-    Object.keys(abilities).forEach(ability => {
+    Object.keys(abilities).filter(name => name != "note").forEach(ability => {
         if (isNaN(abilities[ability].base)) {
             total -= 10;
         }
@@ -35,14 +35,15 @@ const AbilitiesSection = props => {
     return(
         <section>
             <h2><strong>Abilities</strong> [{total} ppt]</h2>
-            <p><strong>Strength</strong> {abilities.str.base} <strong>({strPlus}{abilities.str.eff})</strong> &middot; <strong>
-                Stamina</strong> {abilities.sta.base} <strong>({staPlus}{abilities.sta.eff})</strong> &middot; <strong>
-                Agility</strong> {abilities.agl.base} <strong>({aglPlus}{abilities.agl.eff})</strong> &middot; <strong>
-                Dexterity</strong> {abilities.dex.base} <strong>({dexPlus}{abilities.dex.eff})</strong></p>
-            <p><strong>Fighting</strong> {abilities.fgt.base} <strong>({fgtPlus}{abilities.fgt.eff})</strong> &middot; <strong>
-                Intellect</strong> {abilities.int.base} <strong>({intPlus}{abilities.int.eff})</strong> &middot; <strong>
-                Awareness</strong> {abilities.awe.base} <strong>({awePlus}{abilities.awe.eff})</strong> &middot; <strong>
-                Presence</strong> {abilities.pre.base} <strong>({prePlus}{abilities.pre.eff})</strong></p>
+            <p><strong>&middot; Strength</strong> {abilities.str.base} <strong>({strPlus}{abilities.str.eff}) &middot; Stamina
+                </strong> {abilities.sta.base} <strong>({staPlus}{abilities.sta.eff}) &middot; Agility
+                </strong> {abilities.agl.base} <strong>({aglPlus}{abilities.agl.eff}) &middot; Dexterity
+                </strong> {abilities.dex.base} <strong>({dexPlus}{abilities.dex.eff}) &middot;</strong></p>
+            <p><strong>&middot; Fighting</strong> {abilities.fgt.base} <strong>({fgtPlus}{abilities.fgt.eff}) &middot; Intellect
+                </strong> {abilities.int.base} <strong>({intPlus}{abilities.int.eff}) &middot; Awareness
+                </strong> {abilities.awe.base} <strong>({awePlus}{abilities.awe.eff}) &middot; Presence
+                </strong> {abilities.pre.base} <strong>({prePlus}{abilities.pre.eff}) &middot;</strong></p>
+            { abilities.note ? (<p className="lesser-note">{abilities.note}</p>) : "" }
         </section>
     );
 }

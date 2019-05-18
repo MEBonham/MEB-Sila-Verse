@@ -64,6 +64,12 @@
     font-weight: bold;
 }
 
+.char-sheet .lesser-note {
+    margin-top: 2px;
+    font-size: 1rem;
+    font-style: italic;
+}
+
 .char-sheet h1 {
     font-size: 3.4rem;
     font-weight: bold;

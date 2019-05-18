@@ -18,6 +18,9 @@ const EditHeroForm = props => {
         if (!inputs.heroType) {
             inputs.heroType = "";
         }
+        if (!inputs.abilitiesNote) {
+            inputs.abilitiesNote = "";
+        }
         db.collection("heroes").where("urlid", "==", urlid)
             .get()
             .then(querySnapshot => {
@@ -61,7 +64,8 @@ const EditHeroForm = props => {
                             pre: {
                                 base: inputs.basePre,
                                 eff: inputs.effPre
-                            }
+                            },
+                            note: inputs.abilitiesNote
                         })
                     };
                     db.collection("heroes").doc(heroId)
@@ -136,6 +140,9 @@ const EditHeroForm = props => {
                     heroPrevData.get()
                         .then(doc => {
                             const heroAbilities = JSON.parse(doc.data().abilities);
+                            if (!heroAbilities.note) {
+                                heroAbilities.note = "";
+                            }
                             setInputs({
                                 urlid: doc.data().urlid,
                                 name: doc.data().name,
@@ -158,6 +165,7 @@ const EditHeroForm = props => {
                                 effAwe: heroAbilities.awe.eff,
                                 basePre: heroAbilities.pre.base,
                                 effPre: heroAbilities.pre.eff,
+                                abilitiesNote: heroAbilities.note
                             });
                         })
                         .catch(err => {
@@ -376,6 +384,13 @@ const EditHeroForm = props => {
                                 required
                             />
                         </div>
+                        <input
+                            type="text"
+                            id="abilitiesNote"
+                            placeholder="e.g. Load limit 50 lb."
+                            onChange={handleInputChange}
+                            value={inputs.abilitiesNote}
+                        />
                     </div>
                 </section>
                 <button type="submit">Save Hero</button>

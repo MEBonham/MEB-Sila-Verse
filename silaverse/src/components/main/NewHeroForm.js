@@ -14,6 +14,9 @@ const NewHeroForm = () => {
         if (!inputs.heroType) {
             inputs.heroType = "";
         }
+        if (!inputs.abilitiesNote) {
+            inputs.abilitiesNote = "";
+        }
         db.collection("heroes").add({
             urlid: inputs.urlid,
             name: inputs.name,
@@ -52,7 +55,8 @@ const NewHeroForm = () => {
                 pre: {
                     base: inputs.basePre,
                     eff: inputs.effPre
-                }
+                },
+                note: inputs.abilitiesNote
             })
         })
         .then(heroRef => {
@@ -101,6 +105,7 @@ const NewHeroForm = () => {
             effAwe: "",
             basePre: "",
             effPre: "",
+            abilitiesNote: ""
         })
     }
 
@@ -307,6 +312,13 @@ const NewHeroForm = () => {
                                 required
                             />
                         </div>
+                        <input
+                            type="text"
+                            id="abilitiesNote"
+                            placeholder="e.g. Load limit 50 lb."
+                            onChange={handleInputChange}
+                            value={inputs.abilitiesNote}
+                        />
                     </div>
                 </section>
                 <button type="submit">Save Hero</button>
