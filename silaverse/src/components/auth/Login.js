@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useForm from '../../hooks/useForm';
+import firebase from '../../config/fbConfig';
 
-const Login = () => {
+const Login = props => {
+
+    const [errorMessage, setErrorMessage] = useState("");
 
     const signIn = () => {
-        alert(`Data Received!
-              Email: ${inputs.email}
-              Password: ${inputs.password}`);
+        firebase.auth.signInWithEmailAndPassword(inputs.email, inputs.password)
+            .then(() => {
+                props.history.push("/");
+            })
+            .catch(err => {
+                if ( err.code && err.code.trim() == "auth/wrong-password") {
+                    console.log("Flag");
+                    setErrorMessage("Invalid username or password.");
+                } else {
+                    console.log("Miscellaneous error signing in.", err);
+                }
+            });
     }
 
     const { inputs, handleInputChange, handleSubmit, setInputs } = useForm(signIn);
@@ -31,6 +43,7 @@ const Login = () => {
                 required
             />
             <button type="submit">Login</button>
+            <p className="error-message">{errorMessage}</p>
         </form>
     );
 }

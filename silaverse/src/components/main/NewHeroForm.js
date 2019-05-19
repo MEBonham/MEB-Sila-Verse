@@ -7,7 +7,7 @@ const NewHeroForm = () => {
 
     const [ prevHeroes, setHeroes ] = useGlobal('heroes');
     const sendInfo = () => {
-        const db = firebase.firestore();
+        const db = firebase.db;
         if (!inputs.identity) {
             inputs.identity = "";
         }

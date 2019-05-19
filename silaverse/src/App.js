@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { setGlobal } from 'reactn';
 import { Route } from 'react-router-dom';
 
 import Header from './components/auth/Header';
@@ -8,11 +8,25 @@ import EditHeroForm from './components/main/EditHeroForm';
 import NewHeroForm from './components/main/NewHeroForm';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
+import firebase from './config/fbConfig';
 
 import './App.css';
 import './ContextMenu.css';
 
 function App() {
+
+  firebase.auth.onAuthStateChanged(user => {
+    if (user) {
+      setGlobal({
+        user: user
+      });
+    } else {
+      setGlobal({
+        user: null
+      });
+    }
+  });
+
   return (
     <div className="App">
       <Header />

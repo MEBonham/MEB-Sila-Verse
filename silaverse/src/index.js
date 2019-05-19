@@ -5,7 +5,7 @@ import firebase from './config/fbConfig';
 import './index.css';
 import App from './App';
 
-const db = firebase.firestore();
+const db = firebase.db;
 const heroLib = [];
 db.collection("heroes").get()
     .then(querySnapshot => {

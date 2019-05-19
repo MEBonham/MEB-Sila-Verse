@@ -28,10 +28,12 @@
     color: white;
 }
 
-.App > header > ul a {
+.App > header > ul a,
+.App > header .logout {
     font-size: 1.4rem;
     color: white;
     margin-left: 20px;
+    cursor: pointer;
 }
 
 .full-sidebar {
@@ -65,7 +67,7 @@
 }
 
 .char-sheet .lesser-note {
-    margin-top: 2px;
+    margin-top: 4px;
     font-size: 1rem;
     font-style: italic;
 }
@@ -185,4 +187,9 @@
 
 .login-page input {
     margin-bottom: 10px;
+}
+
+.login-page .error-message {
+    margin-top: 20px;
+    color: #dd0000;
 }

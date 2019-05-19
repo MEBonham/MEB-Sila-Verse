@@ -12,8 +12,15 @@ const firebaseConfig = {
     messagingSenderId: "1008780796581",
     appId: "1:1008780796581:web:93e04e614a8bb054"
   };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-//   firebase.firestore().settings({ timestampsInSnapshots: true });
+  //   firebase.firestore().settings({ timestampsInSnapshots: true });
 
-  export default firebase;
+class Firebase {
+  constructor() {
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    this.auth = firebase.auth();
+    this.db = firebase.firestore();
+  }
+}
+
+  export default new Firebase();
