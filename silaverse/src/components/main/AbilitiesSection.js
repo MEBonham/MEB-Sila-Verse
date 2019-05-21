@@ -1,4 +1,4 @@
-import React, { setGlobal, useGlobal, getGlobal } from 'reactn';
+import React, { setGlobal, useGlobal } from 'reactn';
 import { useEffect } from 'react';
 
 const AbilitiesSection = props => {

@@ -36,6 +36,12 @@
     cursor: pointer;
 }
 
+.App > header .username-display {
+    font-size: 1.4rem;
+    color: blue;
+    cursor: pointer;
+}
+
 .full-sidebar {
     width: 28%;
     height: calc(100% - 2.6rem - 10px);

@@ -5,6 +5,16 @@ import firebase from './config/fbConfig';
 import './index.css';
 import App from './App';
 
+setGlobal({
+    pptTotals: {
+        abilities: 0,
+        powers: 0,
+        advantages: 0,
+        skills: 0,
+        defenses: 0
+    }
+});
+
 const db = firebase.db;
 const heroLib = [];
 db.collection("heroes").get()
@@ -16,14 +26,7 @@ db.collection("heroes").get()
             heroLib.push(hero);
         });
         setGlobal({
-            heroes: heroLib,
-            pptTotals: {
-                abilities: 0,
-                powers: 0,
-                advantages: 0,
-                skills: 0,
-                defenses: 0
-            }
+            heroes: heroLib
         });
     })
     .catch(err => {

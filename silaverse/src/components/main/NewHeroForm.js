@@ -3,7 +3,12 @@ import useForm from '../../hooks/useForm';
 import firebase from '../../config/fbConfig';
 import { useGlobal } from 'reactn';
 
-const NewHeroForm = () => {
+const NewHeroForm = props => {
+
+    const [ user, setUser ] = useGlobal('user');
+    if (!user) {
+        props.history.push("/login");
+    }
 
     const [ prevHeroes, setHeroes ] = useGlobal('heroes');
     const sendInfo = () => {

@@ -7,6 +7,11 @@ import deleteicon from '../../images/delete-icon.png';
 
 const EditHeroForm = props => {
 
+    const [ user, setUser ] = useGlobal('user');
+    if (!user) {
+        props.history.push("/login");
+    }
+
     const db = firebase.db;
     const [ prevHeroes, setHeroes ] = useGlobal('heroes');
     const urlid = props.match.params.id;
