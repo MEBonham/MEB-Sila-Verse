@@ -11,7 +11,6 @@ const CharSheet = props => {
 
     const finalTotal = useRef(0);
     if (pptTotals) {
-        console.log("Flag");
         finalTotal.current = 0;
         Object.keys(pptTotals).forEach(type => {
             finalTotal.current += pptTotals[type];

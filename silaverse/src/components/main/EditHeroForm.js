@@ -8,7 +8,8 @@ import deleteicon from '../../images/delete-icon.png';
 const EditHeroForm = props => {
 
     const [ user, setUser ] = useGlobal('user');
-    if (!user) {
+    const isAuthenticating = useGlobal('isAuthenticating');
+    if (!isAuthenticating && !user) {
         props.history.push("/login");
     }
 
