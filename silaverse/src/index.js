@@ -6,7 +6,6 @@ import './index.css';
 import App from './App';
 
 setGlobal({
-    isAuthenticating: true,
     pptTotals: {
         abilities: 0,
         powers: 0,
@@ -15,7 +14,6 @@ setGlobal({
         defenses: 0
     }
 });
-console.log("Initializing");
 
 const db = firebase.db;
 const heroLib = [];

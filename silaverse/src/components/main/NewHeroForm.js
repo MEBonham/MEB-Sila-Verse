@@ -6,8 +6,7 @@ import { useGlobal } from 'reactn';
 const NewHeroForm = props => {
 
     const [ user, setUser ] = useGlobal('user');
-    const isAuthenticating = useGlobal('isAuthenticating');
-    if (!isAuthenticating && !user) {
+    if (!user) {
         props.history.push("/login");
     }
 

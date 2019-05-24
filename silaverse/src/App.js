@@ -1,4 +1,4 @@
-import React, { setGlobal, getGlobal } from 'reactn';
+import React, { setGlobal } from 'reactn';
 import { Route } from 'react-router-dom';
 
 import Header from './components/auth/Header';
@@ -16,7 +16,6 @@ import './ContextMenu.css';
 function App() {
 
   firebase.auth.onAuthStateChanged(user => {
-    console.log(user);
     if (user) {
       setGlobal({
         user: user
@@ -26,11 +25,6 @@ function App() {
         user: null
       });
     }
-    console.log("Flag1");
-    setGlobal({
-      isAuthenticating: false
-    });
-    console.log("Flag2", getGlobal());
   });
 
   return (
