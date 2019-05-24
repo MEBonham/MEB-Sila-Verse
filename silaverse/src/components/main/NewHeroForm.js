@@ -1,14 +1,14 @@
-import React, { setGlobal } from 'reactn';
+import React, { setGlobal, useGlobal } from 'reactn';
 import useForm from '../../hooks/useForm';
 import firebase from '../../config/fbConfig';
-import { useGlobal } from 'reactn';
 
 const NewHeroForm = props => {
 
-    const [ user, setUser ] = useGlobal('user');
-    if (!user) {
-        props.history.push("/login");
-    }
+    firebase.auth.onAuthStateChanged(user => {
+        if (!user) {
+            props.history.push("/login");
+        }
+    });
 
     const [ prevHeroes, setHeroes ] = useGlobal('heroes');
     const sendInfo = () => {

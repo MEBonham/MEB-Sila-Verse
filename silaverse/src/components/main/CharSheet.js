@@ -1,5 +1,5 @@
 import React, { useGlobal } from 'reactn';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 import AbilitiesSection from './AbilitiesSection';
 

@@ -6,6 +6,7 @@ import './index.css';
 import App from './App';
 
 setGlobal({
+    initialHeaderLink: true,
     pptTotals: {
         abilities: 0,
         powers: 0,

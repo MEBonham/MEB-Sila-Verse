@@ -5,10 +5,11 @@ import firebase from '../../config/fbConfig';
 
 const Login = props => {
 
-    const [ user, setUser ] = useGlobal('user');
-    if (user) {
-        props.history.push("/");
-    }
+    firebase.auth.onAuthStateChanged(user => {
+        if (user) {
+            props.history.push("/");
+        }
+    });
 
     const [errorMessage, setErrorMessage] = useState("");
 

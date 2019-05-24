@@ -15,17 +15,17 @@ import './ContextMenu.css';
 
 function App() {
 
-  firebase.auth.onAuthStateChanged(user => {
-    if (user) {
-      setGlobal({
-        user: user
-      });
-    } else {
-      setGlobal({
-        user: null
-      });
-    }
-  });
+  // firebase.auth.onAuthStateChanged(user => {
+  //   if (user) {
+  //     setGlobal({
+  //       prevSignedIn: true
+  //     });
+  //   } else {
+  //     setGlobal({
+  //       prevSignedIn: false
+  //     });
+  //   }
+  // });
 
   return (
     <div className="App">

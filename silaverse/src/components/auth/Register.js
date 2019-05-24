@@ -1,14 +1,15 @@
-import React, { useGlobal } from 'reactn';
+import React from 'reactn';
 import { useState } from 'react';
 import useForm from '../../hooks/useForm';
 import firebase from '../../config/fbConfig';
 
 const Register = props => {
 
-    const [ user, setUser ] = useGlobal('user');
-    if (!user) {
-        props.history.push("/login");
-    }
+    firebase.auth.onAuthStateChanged(user => {
+        if (!user) {
+            props.history.push("/login");
+        }
+    });
 
     const [errorMessage, setErrorMessage] = useState("");
 
