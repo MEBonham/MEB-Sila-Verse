@@ -31,7 +31,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      {/* <Header2 /> */}
+      <Header2 />
       <Route exact path="/" component={Sidebar} />
       <Route path="/viewhero" component={Sidebar} />
       <Route path="/viewhero/:id" component={CharSheet} />
