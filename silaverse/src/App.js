@@ -2,6 +2,7 @@ import React, { setGlobal } from 'reactn';
 import { Route } from 'react-router-dom';
 
 import Header from './components/auth/Header';
+import Header2 from './components/auth/Header2';
 import Sidebar from './components/sidebar/Sidebar';
 import CharSheet from './components/main/CharSheet';
 import EditHeroForm from './components/main/EditHeroForm';
@@ -15,21 +16,22 @@ import './ContextMenu.css';
 
 function App() {
 
-  // firebase.auth.onAuthStateChanged(user => {
-  //   if (user) {
-  //     setGlobal({
-  //       prevSignedIn: true
-  //     });
-  //   } else {
-  //     setGlobal({
-  //       prevSignedIn: false
-  //     });
-  //   }
-  // });
+  firebase.auth.onAuthStateChanged(user => {
+    if (user) {
+      setGlobal({
+        user: user
+      });
+    } else {
+      setGlobal({
+        user: null
+      });
+    }
+  });
 
   return (
     <div className="App">
       <Header />
+      {/* <Header2 /> */}
       <Route exact path="/" component={Sidebar} />
       <Route path="/viewhero" component={Sidebar} />
       <Route path="/viewhero/:id" component={CharSheet} />

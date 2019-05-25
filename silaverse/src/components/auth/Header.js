@@ -1,5 +1,5 @@
-import React from 'reactn';
-// import { useRef } from 'react';
+import React, { useGlobal } from 'reactn';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import SignedOutLinks from './SignedOutLinks';
@@ -8,17 +8,23 @@ import firebase from '../../config/fbConfig';
 
 const Header = () => {
 
-    let links = <p className="logout">Loading ...</p>;
-    firebase.auth.onAuthStateChanged(user => {
+    const user = useGlobal('user');
+    const [ links, changeLinks ] = useState(<p className="logout">Loading ...</p>);
+    // firebase.auth.onAuthStateChanged(user => {
+    //     if (user) {
+    //         // changeLinks(<SignedInLinks />);
+    //     } else {
+    //         // changeLinks(<SignedOutLinks />);
+    //     }
+    // });
+    useEffect(() => {
         if (user) {
-            console.log("There is a user,", user);
-            links = <SignedInLinks />;
+            changeLinks(<SignedInLinks />);
         } else {
-            console.log("There is not a user,", user);
-            links = <SignedOutLinks />;
+            changeLinks(<SignedOutLinks />);
         }
-        console.log(links);
-    });
+    }, [ user ]);
+    
 
     return(
         <header>

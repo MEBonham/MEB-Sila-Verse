@@ -1,5 +1,5 @@
 import React, { useGlobal } from 'reactn';
-import { useRef } from 'react';
+import { useState } from 'react';
 
 import AbilitiesSection from './AbilitiesSection';
 
@@ -9,12 +9,12 @@ const CharSheet = props => {
     const [ pptTotals, setPptTotals ] = useGlobal('pptTotals');
     const { id } = props.match.params;
 
-    const finalTotal = useRef(0);
+    const [ finalTotal, setFinalTotal ] = useState(0);
     if (pptTotals) {
         console.log("Flag");
-        finalTotal.current = 0;
+        setFinalTotal(0);
         Object.keys(pptTotals).forEach(type => {
-            finalTotal.current += pptTotals[type];
+            setFinalTotal(finalTotal + pptTotals[type]);
         });
     }
 
